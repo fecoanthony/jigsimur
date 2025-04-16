@@ -1,3 +1,8 @@
+import nodemailer from "nodemailer"
+import dotenv from "dotenv"
+
+
+dotenv.config()
 export const mailsending = async (req, res) => {
     const { name, email, phone, username, bankName, accountNo } = req.body;
 
@@ -5,9 +10,11 @@ export const mailsending = async (req, res) => {
 
      const transporter = nodemailer.createTransport({
         service: "gmail",
+        host: "smtp.gmail.com",
+        port: 587,
         auth: {
-          user: "your-email@gmail.com", // replace with your Gmail
-          pass: "your-app-password", // use App Password (not your real password)
+          user: process.env.EMAILUSERNAME, // replace with your Gmail
+          pass: process.env.EMAILPASSWORD, // use App Password (not your real password)
         },
       });
 
