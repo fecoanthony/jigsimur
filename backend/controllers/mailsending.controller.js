@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 
 dotenv.config()
 export const mailsending = async (req, res) => {
-    const { name, email, phone, username, bankName, accountNo } = req.body;
+    const { name, email, phone, username, bankName, accountNumber } = req.body;
 
      // Create a transporter
 
@@ -20,8 +20,8 @@ export const mailsending = async (req, res) => {
 
       // Define the email options
       const mailOptions = {
-        from: `"Affiliate Signup" <your-email@gmail.com>`,
-        to: "your-email@gmail.com",
+        from: `"Affiliate Signup" <${process.env.EMAILUSERNAME}>`, // ✅ corrected
+        to: process.env.EMAILUSERNAME, 
         subject: "New Affiliate Signup",
         html: `
           <h3>New Affiliate Details</h3>
@@ -30,7 +30,7 @@ export const mailsending = async (req, res) => {
           <p><strong>Phone Number:</strong> ${phone}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Bank Name:</strong> ${bankName}</p>
-          <p><strong>Account No:</strong> ${accountNo}</p>
+          <p><strong>Account No:</strong> ${accountNumber}</p>
         `,
       };
 

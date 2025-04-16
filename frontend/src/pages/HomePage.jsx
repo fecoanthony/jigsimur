@@ -1,5 +1,6 @@
 import React from 'react'
 import CategoryItem from '../components/CategoryItem';
+import TestimonialAccordion from '../components/TestimonialAccordion';
 import Footer from '../components/Footer';
 import AffiliateForm from '../components/AffiliateForm';
 
@@ -31,6 +32,7 @@ const HomePage = () => {
 					))}
 				</div>
       </div>
+      <TestimonialAccordion />
       <AffiliateForm />
       <Footer />
     </div>

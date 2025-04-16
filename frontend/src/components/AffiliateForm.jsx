@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { User, Mail, Phone, Banknote, Hash, UserPlus, Loader } from "lucide-react";
+import { toast } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useUserStore } from "../stores/useUserStore";
 
 const AffiliateForm = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     username: "",
     phone: "",
     email: "",
@@ -13,10 +14,12 @@ const AffiliateForm = () => {
     accountNumber: "",
   });
 
-  const { signup, loading } = useUserStore();
+  const [loading, setLoading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     
     try {
       const res = await fetch('http://localhost:5000/api/affiliate', {
@@ -29,13 +32,27 @@ const AffiliateForm = () => {
   
       const data = await res.json();
       if (res.ok) {
-        alert("Form submitted successfully!");
+        toast.success("Form submitted successfully!");
+
+          // ✅ Clear the form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          username: "",
+          bankName: "",
+          accountNumber: "",
+        });
+
       } else {
-        alert("Failed to submit: " + data.message);
+       toast.error("Failed to submit form.");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong!");
+      toast.error("An error occurred.");
+    }
+    finally {
+      setLoading(false);
     }
   };
   
@@ -68,7 +85,7 @@ const AffiliateForm = () => {
               label="Full Name"
               icon={<User className="h-5 w-5 text-gray-400" />}
               value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="John Doe"
             />
 
