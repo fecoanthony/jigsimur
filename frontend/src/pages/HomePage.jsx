@@ -1,6 +1,7 @@
 import React from 'react'
 import CategoryItem from '../components/CategoryItem';
 import Footer from '../components/Footer';
+import AffiliateForm from '../components/AffiliateForm';
 
 const HomePage = () => {
 
@@ -30,6 +31,7 @@ const HomePage = () => {
 					))}
 				</div>
       </div>
+      <AffiliateForm />
       <Footer />
     </div>
   )
