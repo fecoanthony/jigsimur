@@ -24,6 +24,11 @@ const testimonials = [
       "Jigsimur helped me regulate my blood sugar naturally. I highly recommend it for diabetics, but always consult your doctor too.",
   },
   {
+    title: "Cured My Partial Stroke",
+    content:
+      "I was suffering from partial stroke for the past five years. Taking all kinds of medication to no avail until I got to know about jigsimur. I thank God today I can walk perfectly through this wonderful Product.",
+  },
+  {
     title: "Skin Glow and Vitality",
     content:
       "People keep asking what I'm using on my skin. It’s Jigsimur! I feel detoxed and fresh from the inside out.",
@@ -72,7 +77,7 @@ const TestimonialAccordion = () => {
   return (
     <div className="max-w-2xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden">
       <h2 className="text-2xl font-bold text-center text-emerald-400 py-6">
-        What Our Users Say
+      What People Say About Jigsimur
       </h2>
       <div className="divide-y divide-gray-700">
         {testimonials.map((item, index) => (
