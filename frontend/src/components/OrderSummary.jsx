@@ -1,43 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useCartStore } from "../stores/useCartStore";
-import { useUserStore } from "../stores/useUserStore"; // Import User Store
+import { useUserStore } from "../stores/useUserStore";
 import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
-import { usePaystackPayment } from "react-paystack";
 import axios from "../lib/axios";
 import { toast } from "react-hot-toast";
 
-const paystackPublicKey = "pk_live_08a4bfe4222da75b755c21db91a3ee9dad9804d8"; // Replace with your actual Paystack public key
-
 const OrderSummary = () => {
   const { total, subtotal, coupon, isCouponApplied, cart } = useCartStore();
-  const { user } = useUserStore(); // Get user from Zustand store
+  const { user } = useUserStore();
 
   const savings = subtotal - total;
   const formattedSubtotal = subtotal.toFixed(2);
   const formattedTotal = total.toFixed(2);
   const formattedSavings = savings.toFixed(2);
 
-  const userEmail = user?.email; // Get user email dynamically
-
-  const initializePayment = usePaystackPayment({
-    email: userEmail,
-    amount: total * 100, // Convert amount to kobo
-    publicKey: paystackPublicKey,
-    onSuccess: async (response) => {
-      console.log("Payment successful", response);
-      try {
-        const res = await axios.post("/payments/verify", { reference: response.reference });
-        console.log("Verification response:", res.data);
-      } catch (err) {
-        console.error("Verification error:", err);
-      }
-    },
-    onClose: () => {
-      console.log("Payment window closed");
-    },
-  });
+  const userEmail = user?.email;
 
   const handlePayment = async () => {
     if (!userEmail) {
@@ -91,6 +70,7 @@ const OrderSummary = () => {
               <dd className="text-base font-medium text-emerald-400">-{coupon.discountPercentage}%</dd>
             </dl>
           )}
+
           <dl className="flex items-center justify-between gap-4 border-t border-gray-600 pt-2">
             <dt className="text-base font-bold text-white">Total</dt>
             <dd className="text-base font-bold text-emerald-400">₦{formattedTotal}</dd>
