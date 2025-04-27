@@ -4,7 +4,10 @@ import { checkoutSuccess, createCheckoutSession } from "../controllers/payment.c
 
 const router = express.Router();
 
+// Protected route for creating a checkout session
 router.post("/create-checkout-session", protectRoute, createCheckoutSession);
-router.post("/checkout-success", protectRoute, checkoutSuccess);
+
+// Public route to handle Paystack callback after payment
+router.post("/checkout-success", checkoutSuccess);  // No need for protectRoute here
 
 export default router;
