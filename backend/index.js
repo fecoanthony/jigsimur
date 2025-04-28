@@ -22,7 +22,7 @@ const port = process.env.PORT || 5000
 // CORS Configuration
 const allowedOrigins = [
     "http://localhost:5173",           // for local development
-    "https://jigsimur-7.onrender.com"   // your deployed frontend URL
+    "https://jigsimur-9.onrender.com"   // your deployed frontend URL
   ];
   
   app.use(cors({
