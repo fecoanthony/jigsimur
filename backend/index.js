@@ -20,12 +20,21 @@ const db = process.env.MONGO_DB
 const port = process.env.PORT || 5000
 
 // CORS Configuration
-const corsOptions = {
-    origin: "https://jigsimur-7.onrender.com", // Allow only your frontend origin
-    credentials: true, // Allow credentials (cookies, auth headers)
-  };
-
-app.use(cors(corsOptions))
+const allowedOrigins = [
+    "http://localhost:5173",           // for local development
+    "https://jigsimur-7.onrender.com"   // your deployed frontend URL
+  ];
+  
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  }));
 app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
 app.use(cookieParser())
 
