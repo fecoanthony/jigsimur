@@ -73,4 +73,5 @@ export const useCartStore = create((set, get) => ({
 	},
 }));
 
+// thank you lord 
 
