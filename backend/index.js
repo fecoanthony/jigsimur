@@ -21,7 +21,7 @@ const port = process.env.PORT || 5000
 
 // CORS Configuration
 const corsOptions = {
-    origin: "http://localhost:5173", // Allow only your frontend origin
+    origin: "https://jigsimur-7.onrender.com", // Allow only your frontend origin
     credentials: true, // Allow credentials (cookies, auth headers)
   };
 
