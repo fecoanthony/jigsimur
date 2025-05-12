@@ -20,6 +20,7 @@ dotenv.config()
 const db = process.env.MONGO_DB
 const port = process.env.PORT || 5000
 
+const __dirname = path.resolve();
 // CORS Configuration
 app.use(
     cors({
@@ -31,7 +32,6 @@ app.use(
 app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
 app.use(cookieParser())
 
-const __dirname = path.resolve();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
