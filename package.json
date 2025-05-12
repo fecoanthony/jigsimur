@@ -1,0 +1,20 @@
+{
+  "name": "jigsimur",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fecoanthony/jigsimur.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fecoanthony/jigsimur/issues"
+  },
+  "homepage": "https://github.com/fecoanthony/jigsimur#readme",
+  "description": ""
+}

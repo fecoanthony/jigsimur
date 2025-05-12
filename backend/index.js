@@ -11,6 +11,7 @@ import couponRoutes from "./routes/coupon.route.js";
 import paymentRoutes from "./routes/payment.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 import mailRoutes from "./routes/mailsending.js"
+import path from "path"
 
 
 const app = express()
@@ -38,6 +39,7 @@ const allowedOrigins = [
 app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
 app.use(cookieParser())
 
+const __dirname = path.resolve();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
@@ -46,6 +48,15 @@ app.use("/api/coupons", couponRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/", mailRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
 
 mongoose.connect(db).then(() => {
     console.log("Connected to DB")
